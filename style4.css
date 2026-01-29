@@ -1,0 +1,301 @@
+/* أساسيات إعادة الضبط والخطوط */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cairo', sans-serif;
+}
+
+body {
+    background-color: #0d0d1a; /* خلفية داكنة جداً */
+    color: #f0f0f0;
+    overflow-x: hidden; /* يمنع ظهور شريط التمرير الأفقي */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* الخلفية المتحركة (نجوم/جسيمات) */
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.05) 0%, transparent 20%),
+        linear-gradient(135deg, #1a0a2c 0%, #0d0d1a 100%); /* تدرج لون خلفي */
+    z-index: -1;
+    animation: backgroundGlow 20s infinite alternate; /* تأثير توهج خفيف */
+}
+
+@keyframes backgroundGlow {
+    0% { filter: brightness(1); }
+    100% { filter: brightness(1.2); }
+}
+
+/* الناف بار (الهيدر) */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: rgba(0, 0, 0, 0.4); /* خلفية شفافة مع تعتيم */
+    backdrop-filter: blur(5px); /* تأثير ضبابي */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 204, 0, 0.2); /* خط ذهبي خفيف */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.logo {
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    font-weight: 700;
+    color: #ffeb3b; /* لون ذهبي */
+    text-shadow: 0 0 8px rgba(255, 235, 59, 0.6); /* توهج ذهبي */
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: #bbb;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 5px 10px;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-links a i {
+    font-size: 1.3rem; /* حجم الأيقونات */
+    color: #ffcc00; /* لون الأيقونات */
+}
+
+.nav-links a:hover {
+    color: #fff;
+    transform: translateY(-3px);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #ffcc00;
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+/* المحتوى الرئيسي */
+.content-wrapper {
+    flex-grow: 1; /* يجعل المحتوى يأخذ المساحة المتبقية */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* قسم الـ Hero */
+.hero-section {
+    text-align: center;
+    padding: 100px 5% 50px;
+    max-width: 900px;
+    animation: fadeInScale 1s ease-out forwards;
+}
+
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 7vw, 5rem); /* حجم خط كبير ومرن */
+    margin-bottom: 20px;
+    line-height: 1.2;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+/* ...existing code..*/
+
+.gradient-text {
+    background: linear-gradient(45deg, #ffeb3b, #ff8c00, #ff1493); 
+    /* تدرج لون ساحر */
+
+    -webkit-background-clip: text; /* For Safari */
+    background-clip: text; /* Standard property */
+    -webkit-text-fill-color: transparent;
+    text-shadow: none; /* إزالة الظل من النص المتدرج */
+
+}
+/* ...existing code...*/
+
+.hero-subtitle {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    color: #ccc;
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    animation: slideInUp 1s ease-out forwards;
+    animation-delay: 0.5s;
+    opacity: 0;
+}
+
+@keyframes slideInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.explore-btn {
+    background: linear-gradient(45deg, #ffcc00, #ff8c00); /* زر بتدرج ذهبي */
+    color: #1a0a2c; /* لون نص داكن */
+    padding: 15px 40px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(255, 172, 0, 0.4);
+    animation: pulse 1.5s infinite alternate;
+}
+
+.explore-btn:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 8px 25px rgba(255, 172, 0, 0.6);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.02); }
+}
+
+/* قسم عرض المميزات */
+.feature-showcase {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 3 أعمدة مرنة */
+    gap: 30px;
+    padding: 80px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.showcase-card {
+    background: rgba(26, 10, 44, 0.6); /* خلفية بطاقة شفافة */
+    backdrop-filter: blur(8px); /* تأثير ضبابي قوي */
+    padding: 40px 20px;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid rgba(255, 204, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.showcase-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 204, 0, 0.1), transparent);
+    transition: 0.7s;
+}
+
+.showcase-card:hover::before {
+    left: 100%;
+}
+
+.showcase-card:hover {
+    transform: translateY(-15px) scale(1.03);
+    border-color: #ffcc00;
+    box-shadow: 0 15px 40px rgba(255, 172, 0, 0.3);
+}
+
+.icon-effect {
+    font-size: 3.5rem;
+    color: #ffeb3b;
+    margin-bottom: 20px;
+    text-shadow: 0 0 12px rgba(255, 235, 59, 0.7);
+    animation: iconBounce 2s infinite alternate;
+}
+
+@keyframes iconBounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-5px); }
+}
+
+.showcase-card h2 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.showcase-card p {
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    color: #c0c0c0;
+}
+
+/* الموبايل وأجهزة العرض الصغيرة جداً */
+@media (max-width: 768px) {
+    .nav-links {
+        gap: 10px;
+    }
+    .nav-links a {
+        font-size: 1rem;
+        padding: 5px 8px;
+    }
+
+    .hero-section {
+        padding: 80px 5% 40px;
+    }
+    .hero-title {
+        font-size: clamp(2rem, 9vw, 3.5rem);
+    }
+    .hero-subtitle {
+        font-size: clamp(0.9rem, 4vw, 1.2rem);
+    }
+    .explore-btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+
+    .feature-showcase {
+        padding: 50px 5%;
+        grid-template-columns: 1fr; /* عمود واحد في الموبايل */
+    }
+    .showcase-card {
+        padding: 30px 15px;
+    }
+}
+
+/* الأجهزة الأصغر جداً (مثل iPhone SE) */
+@media (max-width: 480px) {
+    nav {
+        padding: 10px 3%;
+    }
+    .nav-links a {
+        font-size: 0.9rem;
+    }
+    .hero-section {
+        padding: 60px 3% 30px;
+    }
+}

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عبقرينو | تطوير واجهات المستخدم الاحترافية</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #ffaa00;
+            --secondary: #d4af37;
+            --accent: #c1121f;
+            --dark: #050505;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* خلفية متحركة خفيفة */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 170, 0, 0.05), transparent);
+            z-index: -1;
+        }
+
+        /* ===== Header & Nav ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--primary);
+            text-shadow: 0 0 10px rgba(255, 170, 0, 0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 15px;
+            transition: 0.3s;
+            padding: 8px 15px;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            background: var(--glass);
+            color: var(--primary);
+        }
+
+        /* ===== Hero Section ===== */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero-h1 {
+            font-size: clamp(40px, 8vw, 80px);
+            font-weight: 900;
+            background: linear-gradient(to bottom, #fff, var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .hero-p {
+            font-size: 20px;
+            color: #ccc;
+            margin: 20px auto;
+            max-width: 700px;
+        }
+
+        .cta-group {
+            margin-top: 40px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* الأزرار الاحترافية */
+        .main-btn {
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.4s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #000;
+            box-shadow: 0 10px 20px rgba(255, 170, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 170, 0, 0.4);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--glass);
+            color: #fff;
+            background: var(--glass);
+        }
+
+        .btn-outline:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        /* ===== Sections General ===== */
+        section {
+            padding: 100px 10%;
+        }
+
+        .section-title {
+            font-size: 35px;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px; right: 0;
+            width: 50px; height: 4px;
+            background: var(--accent);
+        }
+
+        /* ===== Cards Grid ===== */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid var(--glass);
+            transition: 0.4s;
+            cursor: default;
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: var(--primary);
+            transform: translateY(-10px);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .card p {
+            color: #aaa;
+            line-height: 1.7;
+        }
+
+        /* ===== Floating WhatsApp ===== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 65px;
+            height: 65px;
+            background: #25d366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            text-decoration: none;
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+            z-index: 2000;
+            transition: 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            padding: 80px 10%;
+            background: #000;
+            border-top: 1px solid var(--glass);
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-h1 { font-size: 45px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">👑 عبقرينو</div>
+        <div class="nav-links">
+            <a href="#services">خدماتي</a>
+            <a href="#projects">الأعمال</a>
+            <a href="https://wa.me/201158606601" style="background: var(--primary); color: #000; font-weight: bold;">اطلب موقعك</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content" data-aos="zoom-in">
+            <h1 class="hero-h1">نصنع لك واجهة <br> تليق بطموحك</h1>
+            <p class="hero-p">أنا مصطفى محمد، مطور واجهات أمامية متخصص في تحويل الأفكار إلى مواقع تفاعلية، سريعة، وجذابة تخطف الأنظار.</p>
+            <div class="cta-group">
+                <a href="https://wa.me/201158606601?text=أهلاً عبقرينو، أريد الاستفسار عن خدمة صنع موقع" class="main-btn btn-primary">
+                    <span>🚀</span> اطلب موقعك الآن
+                </a>
+                <a href="#projects" class="main-btn btn-outline">مشاهدة أعمالي</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2 class="section-title" data-aos="fade-left">لماذا تختار "عبقرينو"؟</h2>
+        <div class="grid">
+            <div class="card" data-aos="fade-up">
+                <h3>⚡ سرعة صاروخية</h3>
+                <p>مواقعنا مبرمجة بأحدث التقنيات لضمان أفضل سرعة تحميل وتجربة مستخدم سلسة.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="100">
+                <h3>📱 تصميم متجاوب</h3>
+                <p>موقعك سيعمل ببراعة على جميع الشاشات (موبايل، تابلت، كمبيوتر) وبأعلى دقة.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+                <h3>🎨 لمسة إبداعية</h3>
+                <p>لا نصنع مجرد صفحات، بل نصنع هوية بصرية تميزك عن جميع منافسيك في السوق.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" style="background: rgba(255,255,255,0.02);">
+        <h2 class="section-title" data-aos="fade-left">معرض الأعمال</h2>
+        <div class="grid">
+            <div class="card" data-aos="flip-right">
+                <div style="font-size: 50px; margin-bottom: 15px;">🛍️</div>
+                <h3>متاجر إلكترونية</h3>
+                <p>تصميم متكامل لعرض منتجاتك وزيادة مبيعاتك.</p>
+                <a href="index2.html" style="color: var(--primary); text-decoration: none; display: block; margin-top: 15px; font-weight: bold;">مشاهدة التفاصيل ←</a>
+            </div>
+            <div class="card" data-aos="flip-right" data-aos-delay="100">
+                <div style="font-size: 50px; margin-bottom: 15px;">🎯</div>
+                <h3>صفحات هبوط (Landing)</h3>
+                <p>صفحات قوية مخصصة للحملات الإعلانية وجلب العملاء.</p>
+                <a href="index3.html" style="color: var(--primary); text-decoration: none; display: block; margin-top: 15px; font-weight: bold;">مشاهدة التفاصيل ←</a>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <h2 data-aos="fade-up">هل أنت مستعد لنقل عملك للمستوى القادم؟</h2>
+        <p style="margin: 20px 0; color: #888;">تواصل معي الآن وابدأ رحلة النجاح الرقمي.</p>
+        <a href="tel:01158606601" class="hero-h1" style="font-size: 30px; text-decoration: none; display: block;">01158606601</a>
+        <p style="margin-top: 50px; font-size: 14px; opacity: 0.5;">© 2026 جميع الحقوق محفوظة لـ عبقرينو</p>
+    </footer>
+
+    <a href="https://wa.me/201158606601" class="whatsapp-float" target="_blank">
+        <svg fill="#fff" width="35px" height="35px" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.94 3.659 1.437 5.634 1.437h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
+</body>
+</html>
